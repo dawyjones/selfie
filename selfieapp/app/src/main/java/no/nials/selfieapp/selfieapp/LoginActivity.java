@@ -18,14 +18,14 @@ package no.nials.selfieapp.selfieapp;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextPassword;
+    EditText editTextEmail, editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
 
@@ -51,13 +51,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void userLogin() {
         //first getting the values
-        final String username = editTextUsername.getText().toString();
+        final String email = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
 
         //validating inputs
-        if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter your username");
-            editTextUsername.requestFocus();
+        if (TextUtils.isEmpty(email)) {
+            editTextEmail.setError("Please enter your email");
+            editTextEmail.requestFocus();
             return;
         }
 
@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
+                params.put("email", email);
                 params.put("password", password);
 
                 //returing the response
