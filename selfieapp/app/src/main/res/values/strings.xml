@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SelfieApp</string>
+    <string name="phone">Phone</string>
 </resources>

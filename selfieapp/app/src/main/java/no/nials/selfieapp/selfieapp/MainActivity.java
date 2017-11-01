@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextEmail, editTextPassword;
+    EditText editTextPhone, editTextEmail, editTextPassword;
     RadioGroup radioGroupGender;
 
 
@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ProfileActivity.class));
             return;
         }
-
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
+        editTextPhone = (EditText) findViewById(R.id.editTextPhone);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         radioGroupGender = (RadioGroup) findViewById(R.id.radioGender);
@@ -64,17 +63,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        final String username = editTextUsername.getText().toString().trim();
+        final String phone = editTextPhone.getText().toString().trim();
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
-
         final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
 
         //first we will do the validations
 
-        if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter username");
-            editTextUsername.requestFocus();
+
+        if (TextUtils.isEmpty(phone)) {
+            editTextEmail.setError("Please enter your phonenumber");
+            editTextEmail.requestFocus();
             return;
         }
 
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
+                params.put("phone", phone);
                 params.put("email", email);
                 params.put("password", password);
                 params.put("gender", gender);

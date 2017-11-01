@@ -14,8 +14,8 @@ public class User {
 
     public User(int id, String email, String phone, String gender) {
         this.id = id;
-        this.email = email;
         this.phone = phone;
+        this.email = email;
         this.gender = gender;
     }
     public int getId(){ return id;}
