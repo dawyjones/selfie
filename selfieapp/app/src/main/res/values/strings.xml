@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SelfieApp</string>
     <string name="phone">Phone</string>
+    <string name="title_activity_menu">MenuActivity</string>
 </resources>
