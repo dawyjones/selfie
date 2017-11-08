@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Sondre\Documents\GitHub\selfie2\selfie\selfieapp\app\app.iml" filepath="C:\Users\Sondre\Documents\GitHub\selfie2\selfie\selfieapp\app\app.iml" />
       <module fileurl="file://C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\app\app.iml" filepath="C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/selfieapp.iml" filepath="$PROJECT_DIR$/selfieapp.iml" />
       <module fileurl="file://C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\selfieapp.iml" filepath="C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\selfieapp.iml" />
+      <module fileurl="file://C:\Users\Sondre\Documents\GitHub\selfie2\selfie\selfieapp\selfieapp.iml" filepath="C:\Users\Sondre\Documents\GitHub\selfie2\selfie\selfieapp\selfieapp.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonPicture"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Take a new selfie" />
+
+    <Button
+        android:id="@+id/buttonLeaderboards"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/buttonPicture"
+        android:layout_below="@+id/buttonPicture"
+        android:layout_marginTop="42dp"
+        android:text="Leaderboards" />
+
+    <Button
+        android:id="@+id/buttonMyPictures"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/buttonLeaderboards"
+        android:layout_below="@+id/buttonLeaderboards"
+        android:layout_marginTop="42dp"
+        android:text="My selfies" />
+
+    <Button
+        android:id="@+id/buttonProfile"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/buttonMyPictures"
+        android:layout_below="@+id/buttonMyPictures"
+        android:layout_marginTop="42dp"
+        android:text="Profile" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/buttonProfile"
+        android:layout_below="@+id/buttonProfile"
+        android:layout_marginTop="42dp"
+        android:text="Logout" />
+</RelativeLayout>
