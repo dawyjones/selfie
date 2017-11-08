@@ -22,8 +22,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
+<<<<<<< HEAD
         <activity android:name=".CameraSelfie" />
         <activity android:name=".ProfileActivity"></activity>
+=======
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".MySelfiesActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+
+        </intent-filter>
+        </activity>
+>>>>>>> refs/remotes/origin/Henrik
     </application>
 
 </manifest>
