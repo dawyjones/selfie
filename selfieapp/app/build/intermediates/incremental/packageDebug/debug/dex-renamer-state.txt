@@ -1,4 +1,0 @@
-#Wed Nov 01 14:01:09 CET 2017
-base.0=C\:\\Users\\Kami\\Documents\\GitHub\\selfie\\selfie\\selfieapp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-renamed.0=classes.dex
-file.0=C\:\\Users\\Kami\\Documents\\GitHub\\selfie\\selfie\\selfieapp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex

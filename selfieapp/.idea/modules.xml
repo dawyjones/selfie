@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\app\app.iml" filepath="C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/selfieapp.iml" filepath="$PROJECT_DIR$/selfieapp.iml" />
+      <module fileurl="file://C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\selfieapp.iml" filepath="C:\Users\HenrikJones\Documents\GitHub\selfie3\selfieapp\selfieapp.iml" />
+      <module fileurl="file://C:\Users\Kami\Documents\GitHub\selfie\selfie\selfieapp\selfieapp.iml" filepath="C:\Users\Kami\Documents\GitHub\selfie\selfie\selfieapp\selfieapp.iml" />
+    </modules>
+  </component>
+</project>
