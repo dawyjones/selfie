@@ -30,4 +30,18 @@
 
         />
 
+
+    <Button
+        android:id="@+id/uploadBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/holo_blue_dark"
+        android:paddingBottom="40dp"
+        android:text="Upload Selfie"
+        android:textColor="@android:color/white"
+
+
+        />
+
 </LinearLayout>
