@@ -29,14 +29,18 @@ public class Vote implements Serializable {
     
     @Id
     @GeneratedValue
+    private int voteID;
     private int pictureID;
-    private Date date;
-
+    private String date;
+    
+    public int getVoteID() {
+        return voteID;
+    }
     public int getPictureID() {
         return pictureID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -44,7 +48,7 @@ public class Vote implements Serializable {
         this.pictureID = pictureID;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

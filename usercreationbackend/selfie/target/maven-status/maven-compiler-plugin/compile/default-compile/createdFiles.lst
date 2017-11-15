@@ -1,7 +1,5 @@
 selfie/User.class
+selfie/ApplicationConfig.class
 selfie/Test.class
 selfie/MyServicee.class
 selfie/UserResource.class
-selfie/VoteResource.class
-selfie/ApplicationConfig.class
-selfie/Vote.class

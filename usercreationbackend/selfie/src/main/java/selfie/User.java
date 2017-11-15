@@ -35,6 +35,7 @@ public class User implements Serializable {
     private int phone;
     private String name;
     private Date birthday;
+    private int score;
     private String gender;
 
     public void setEmail(String email) {
@@ -57,6 +58,9 @@ public class User implements Serializable {
         this.birthday = birhtday;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
     public void setGender(String gender) {
         this.gender = gender;
     }
@@ -79,6 +83,10 @@ public class User implements Serializable {
 
    public Date getBirhtday() {
        return birthday;
+    }
+
+    public int getScore() {
+        return score;
     }
     
     public String getGender()  {
