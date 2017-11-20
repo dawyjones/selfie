@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(selfie.MyServicee.class);
+        resources.add(selfie.PictureResource.class);
         resources.add(selfie.UserResource.class);
         resources.add(selfie.VoteResource.class);
     }
