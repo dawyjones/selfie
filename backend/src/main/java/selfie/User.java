@@ -2,7 +2,6 @@ package selfie;
 
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,7 +33,7 @@ public class User implements Serializable {
     private String password;
     private int phone;
     private String name;
-    private Date birthday;
+    private String birthday;
     private String gender;
 
     public void setEmail(String email) {
@@ -53,7 +52,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public void setBirhtday(Date birhtday) {
+    public void setBirhtday(String birhtday) {
         this.birthday = birhtday;
     }
 
@@ -77,7 +76,7 @@ public class User implements Serializable {
         return name;
     }
 
-   public Date getBirhtday() {
+   public String getBirhtday() {
        return birthday;
     }
     

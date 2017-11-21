@@ -1,6 +1,5 @@
 package selfie;
 
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,7 +37,7 @@ public class UserResource {
     @POST
     @Path("newUser")
     public Response newUser(@QueryParam(value = "name") String name,
-                            @QueryParam(value = "birthday") Date birthday,
+                            @QueryParam(value = "birthday") String birthday,
                             @QueryParam(value = "email") String email,
                             @QueryParam(value = "password") String password,
                             @QueryParam(value = "phone") int phone,
