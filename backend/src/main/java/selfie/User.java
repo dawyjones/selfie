@@ -29,6 +29,7 @@ public class User implements Serializable {
     
     @Id
     @GeneratedValue
+    private int userId;
     private String email;
     private String password;
     private int phone;
@@ -36,6 +37,11 @@ public class User implements Serializable {
     private String birthday;
     private String gender;
 
+    public int getUserId()
+    {
+        return userId;
+    }
+    
     public void setEmail(String email) {
         this.email = email;
     }

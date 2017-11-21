@@ -34,12 +34,44 @@ public class Picture {
     @Id
     @GeneratedValue
     
-    private String path;
+    private String pictureJson;
     private int author;
     private String date;
     private int vote;
-    private long latitude;
-    private long longitude;
+
+    public String getPictureJson() {
+        return pictureJson;
+    }
+
+    public int getAuthor() {
+        return author;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getVote() {
+        return vote;
+    }
+
+
+    public void setpicture(String pictureJson) {
+        this.pictureJson = pictureJson;
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setVote(int vote) {
+        this.vote = vote;
+    }
+    
     
 
     

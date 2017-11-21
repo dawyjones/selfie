@@ -11,10 +11,6 @@ create table if not exists user  (
     gender varchar(1) not null
 );
 
-create table if not exists pictureMode (
-    modeId int auto_increment unique primary key,
-    mode int
-);
 
 create table if not exists picture (
     pictureID int primary key unique not null auto_increment,
@@ -25,8 +21,6 @@ create table if not exists picture (
     vote int,
     latitude decimal(18,12),
     longitude decimal(18,12),
-    modeId int,
-    foreign key(modeId) references pictureMode(modeId)
 );
 
 create table if not exists vote (
