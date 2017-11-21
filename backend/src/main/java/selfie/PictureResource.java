@@ -23,7 +23,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Frank Even Valde
  */
-@Path("path")
+@Path("picture")
 @Stateless
 public class PictureResource {
     @PersistenceContext
@@ -32,7 +32,7 @@ public class PictureResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Picture> getPaths() {
-        return em.createQuery("SELECT u FROM u",Picture.class).getResultList();
+        return em.createQuery("SELECT u FROM picture u",Picture.class).getResultList();
     }
     
     @POST
