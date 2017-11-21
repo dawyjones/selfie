@@ -34,8 +34,7 @@ public class MySelfiesActivity extends AppCompatActivity {
             selfieList.add(itr.next());
             System.out.println("TESTING SELFIEList: " + selfieList.toString());
         }
-
-    MySelfiesListAdapter adp = new MySelfiesListAdapter(this,R.layout.grid_view_items, selfieList);
+        MySelfiesListAdapter adp = new MySelfiesListAdapter(this,R.layout.grid_view_items, selfieList);
         simplelist .setAdapter(adp);
 
     }
