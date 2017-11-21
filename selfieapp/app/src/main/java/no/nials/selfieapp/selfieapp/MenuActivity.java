@@ -56,7 +56,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void pictureActivity(View view){
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, CameraSelfie.class);
         startActivity(intent);
     }
     public void leaderBoardsActivity(View view){
@@ -64,7 +64,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void myPicturesActivity(View view){
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, MySelfiesActivity.class);
         startActivity(intent);
     }
     public void profileActivity(View view){
