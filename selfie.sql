@@ -14,13 +14,11 @@ create table if not exists user  (
 
 create table if not exists picture (
     pictureID int primary key unique not null auto_increment,
-   path varchar(255),
+    picture varchar(20000),
     author int(255),
     foreign key (author) references user(userId),
     date date,
-    vote int,
-    latitude decimal(18,12),
-    longitude decimal(18,12),
+    vote int
 );
 
 create table if not exists vote (

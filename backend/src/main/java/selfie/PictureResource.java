@@ -32,7 +32,7 @@ public class PictureResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Picture> getPaths() {
-        return em.createQuery("SELECT u FROM picture u",Picture.class).getResultList();
+        return em.createQuery("SELECT u FROM Picture u",Picture.class).getResultList();
     }
     
     @POST
