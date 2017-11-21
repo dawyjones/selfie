@@ -7,6 +7,7 @@ package selfie;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,7 +34,7 @@ public class VoteResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Vote> getUsers() {
+    public HashMap<Vote> getUsers() {
         return em.createQuery("SELECT u FROM Vote u",Vote.class).getResultList();
     }
     

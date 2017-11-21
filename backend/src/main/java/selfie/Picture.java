@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@Table(name="path")
+@Table(name="picture")
 public class Picture {
     
     @Id
