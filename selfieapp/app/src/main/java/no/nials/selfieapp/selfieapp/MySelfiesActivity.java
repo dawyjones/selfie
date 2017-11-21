@@ -1,10 +1,15 @@
 package no.nials.selfieapp.selfieapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -34,9 +39,18 @@ public class MySelfiesActivity extends AppCompatActivity {
             selfieList.add(itr.next());
             System.out.println("TESTING SELFIEList: " + selfieList.toString());
         }
-
-    MySelfiesListAdapter adp = new MySelfiesListAdapter(this,R.layout.grid_view_items, selfieList);
-        simplelist .setAdapter(adp);
+        MySelfiesListAdapter adp = new MySelfiesListAdapter(this,R.layout.grid_view_items, selfieList);
+        simplelist.setAdapter(adp);
+        simplelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), MySelfiesFullView.class);
+                intent.putExtra("url",selfieList.get(position).toString());
+                System.out.println("Clicked this imgURL: " +selfieList.get(position).toString());
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -27,6 +27,10 @@ public class MySelfiesListAdapter extends ArrayAdapter<String> {
         return super.getCount();
     }
 
+    public ArrayList getImgList() {
+        return imgList;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //TEST OMRÅDE
