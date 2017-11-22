@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    private static final String LOGIN_REQUEST_URL = "http://nials.no/php";
+    private static final String LOGIN_REQUEST_URL = "http://nials.no:8080/selfie/api/user";
     private Map<String, String> params;
 
     public LoginRequest(String email, String password, Response.Listener<String> listener) {
-        super(Method.POST, LOGIN_REQUEST_URL, listener, null);
+        super(Method.GET, LOGIN_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);

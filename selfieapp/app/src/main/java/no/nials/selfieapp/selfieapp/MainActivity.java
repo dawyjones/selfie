@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                                 userJson.getString("email"),
                                 userJson.getString("phone"),
                                 userJson.getString("gender")
+
                         );
 
                         //storing the user in shared preferences
