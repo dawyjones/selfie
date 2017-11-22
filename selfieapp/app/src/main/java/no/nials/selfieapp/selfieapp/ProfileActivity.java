@@ -33,12 +33,12 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         //getting the current user
-        User user = SharedPrefManager.getInstance(this).getUser();
+       // User user = SharedPrefManager.getInstance(this).getUser();
 
         //setting the values to the textviews
-        textViewUsername.setText(user.getPhone());
-        textViewEmail.setText(user.getEmail());
-        textViewGender.setText(user.getGender());
+      //  textViewUsername.setText(user.getPhone());
+       // textViewEmail.setText(user.getEmail());
+        //textViewGender.setText(user.getGender());
 
         //when the user presses logout button
         //calling the logout method

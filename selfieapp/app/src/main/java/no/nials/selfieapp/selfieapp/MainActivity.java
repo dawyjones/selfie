@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 //if user pressed on login
                 //we will open the login screen
                 finish();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, Login.class));
             }
         });
 
@@ -145,8 +145,11 @@ public class MainActivity extends AppCompatActivity {
                         //creating a new user object
                         User user = new User(
                                 userJson.getInt("id"),
+                                userJson.getString("name"),
+                                userJson.getString("birthday"),
+                                userJson.getInt("phone"),
+                                userJson.getString("password"),
                                 userJson.getString("email"),
-                                userJson.getString("phone"),
                                 userJson.getString("gender")
                         );
 
