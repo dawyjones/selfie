@@ -68,7 +68,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void profileActivity(View view){
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, StreamActivity.class);
         startActivity(intent);
     }
     public void logOutActivity(View view){

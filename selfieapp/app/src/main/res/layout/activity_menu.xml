@@ -37,7 +37,7 @@
         android:layout_alignStart="@+id/buttonMyPictures"
         android:layout_below="@+id/buttonMyPictures"
         android:layout_marginTop="42dp"
-        android:text="Profile" />
+        android:text="The Selfie Stream" />
 
     <Button
         android:id="@+id/buttonLogout"

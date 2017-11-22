@@ -15,7 +15,7 @@ import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 
-public class CameraSelfie extends AppCompatActivity{
+public class CameraSelfie extends AppCompatActivity {
 
     ImageView imageView;
     String picturePath;
@@ -26,9 +26,9 @@ public class CameraSelfie extends AppCompatActivity{
         setContentView(R.layout.activity_camera);
         Button uploadBtn = (Button)findViewById(R.id.uploadBtn);
         Button cameraBtn = (Button)findViewById(R.id.cameraBtn);
-       imageView = (ImageView)findViewById(R.id.imageView);
+        imageView = (ImageView)findViewById(R.id.imageView);
 
-       //lager knapper for å ta bilde og for å laste opp
+        //lager knapper for å ta bilde og for å laste opp
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,9 +38,9 @@ public class CameraSelfie extends AppCompatActivity{
         });
         //knapp for å laste opp
         uploadBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    upload();
+            @Override
+            public void onClick(View view) {
+                upload();
             }
         });
 
@@ -48,30 +48,34 @@ public class CameraSelfie extends AppCompatActivity{
     }
 
 
-    //Må gjøre om til base64 for å sende bilde med json tydeligis haha
+
     private void upload(){
-        // Image location URL
-        Log.e("path", "----------------" + picturePath);
 
-        // Image
-        Bitmap bm = BitmapFactory.decodeFile(picturePath);
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
-        byte[] ba = bao.toByteArray();
-        ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
-
-        Log.e("base64", "-----" + ba1);
-
-        // Upload image to server
-        //new uploadToServer().execute();
-
+        AsyncT asyncT = new AsyncT(picturePath);
+        asyncT.execute();
     }
 
 
-//Lager til bilde og viser i imageview
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-        imageView.setImageBitmap(bitmap);
+
+        //encode image to base64 string
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+       /* Log.d("SONDRE",imageString);*/
+
+        imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+        picturePath = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        imageView.setImageBitmap(decodedImage);
+        picturePath.trim();
+
+        /*Log.d("SONDRE",picturePath);*/
+
     }
 }

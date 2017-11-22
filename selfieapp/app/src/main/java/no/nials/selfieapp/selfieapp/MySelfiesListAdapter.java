@@ -1,40 +1,51 @@
 package no.nials.selfieapp.selfieapp;
 
-import android.app.Activity;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class MySelfiesListAdapter extends ArrayAdapter<String> {
 
-    private final Activity context;
-    private final String[] itemname;
-    private final Integer[] imgid;
+    ArrayList imgList = new ArrayList<>();
+    Iterator itr = imgList.iterator();
 
-    public MySelfiesListAdapter(Activity context, String[] itemname, Integer[] imgid) {
-        super(context, R.layout.mylist, itemname);
-        // TODO Auto-generated constructor stub
-
-        this.context=context;
-        this.itemname=itemname;
-        this.imgid=imgid;
+    public MySelfiesListAdapter(Context context, int textViewRecourceId, ArrayList objects) {
+        super(context, textViewRecourceId, objects);
+        //System.out.println("TestingAdapterInput: " + urls.toString());
+        this.imgList=objects;
+    }
+    @Override
+    public int getCount() {
+        return super.getCount();
     }
 
-    public View getView(int position,View view,ViewGroup parent) {
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.mylist, null,true);
+    public ArrayList getImgList() {
+        return imgList;
+    }
 
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        //TEST OMRÅDE
+       // System.out.println("TEST adapter: " + imgList.get(position).toString());
 
-        txtTitle.setText(itemname[position]);
-        imageView.setImageResource(imgid[position]);
-        extratxt.setText("Description "+itemname[position]);
-        return rowView;
+        View v = convertView;
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        v = inflater.inflate(R.layout.grid_view_items, null);
+        ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
 
-    };
+        Picasso.with(getContext())
+                .load(imgList.get(position).toString())
+                .into(imageView);
+        return v;
+
+    }
+
 }

@@ -3,9 +3,12 @@
     package="no.nials.selfieapp.selfieapp">
 
     <!-- adding internet permission -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,22 +25,29 @@
         </activity>
         <activity android:name=".LoginActivity" />
 
-        <activity android:name=".CameraSelfie" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name=".CameraSelfie">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    </activity>
-        <activity android:name=".ProfileActivity"/>
-
-        <activity android:name=".MySelfiesActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".ProfileActivity" />
+
+        <activity android:name=".MySelfiesFullView">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+        <activity android:name=".MySelfiesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".StreamActivity"></activity>
     </application>
 
 </manifest>

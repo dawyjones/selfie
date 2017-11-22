@@ -1,68 +1,57 @@
 package no.nials.selfieapp.selfieapp;
 
-import android.app.ListActivity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.EditText;
-import android.app.Activity;
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
-public class MySelfiesActivity extends Activity{
 
-    ListView list;
-    String[] itemname ={
-            "Safari",
-            "Camera",
-            "Global",
-            "FireFox",
-            "UC Browser",
-            "Android Folder",
-            "VLC Player",
-            "Cold War"
+public class MySelfiesActivity extends AppCompatActivity {
+
+    String[] myStrings = new String[] {"https://www.dumpaday.com/wp-content/uploads/2017/01/random-pictures-74.jpg",
+            "https://gomerblog.com/wp-content/uploads/2016/05/Bear-Grylls.jpeg",
+            "https://defenders.org/sites/default/files/styles/large/public/tiger-dirk-freder-isp.jpg",
+            "https://images.moviepilot.com/image/upload/c_fill,h_470,q_auto:good,w_620/p0cx4svaazz1fkx3xia2.jpg",
     };
 
-    Integer[] imgid={
-            R.drawable.pic1,
-            R.drawable.pic2,
-         R.drawable.pic3,
-            R.drawable.pic4,
-            R.drawable.pic5,
-            R.drawable.pic6,
-            R.drawable.pic7,
-            R.drawable.pic8,
-    };
+    List <String> mylist = Arrays.asList(myStrings);
+    Iterator itr = mylist.iterator();
+    GridView simplelist;
+    ArrayList selfieList=new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myselfies);
-
-        MySelfiesListAdapter adapter=new MySelfiesListAdapter(this, itemname, imgid);
-        list=(ListView)findViewById(R.id.list);
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new OnItemClickListener() {
-
+        System.out.println("Testing: " + mylist.toString());
+        setContentView(R.layout.mygridview);
+        simplelist = (GridView) findViewById(R.id.simpleGridView);
+        while(itr.hasNext()) {
+            selfieList.add(itr.next());
+            System.out.println("TESTING SELFIEList: " + selfieList.toString());
+        }
+        MySelfiesListAdapter adp = new MySelfiesListAdapter(this,R.layout.grid_view_items, selfieList);
+        simplelist.setAdapter(adp);
+        simplelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
+            public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                // TODO Auto-generated method stub
-                String Slecteditem= itemname[+position];
-                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(getApplicationContext(), MySelfiesFullView.class);
+                intent.putExtra("url",selfieList.get(position).toString());
+                System.out.println("Clicked this imgURL: " +selfieList.get(position).toString());
+                startActivity(intent);
             }
         });
+
     }
 
 }
