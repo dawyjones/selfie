@@ -69,8 +69,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(Login.this, MainActivity.class));
             }
         });
 
