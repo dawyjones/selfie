@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-<<<<<<< HEAD
+
         <activity android:name=".CameraSelfie">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,23 +33,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProfileActivity" />
-=======
+
         <activity android:name=".MySelfiesFullView">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-        <activity android:name=".CameraSelfie" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
-    </activity>
-        <activity android:name=".ProfileActivity"/>
-
->>>>>>> Henrik
         <activity android:name=".MySelfiesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
