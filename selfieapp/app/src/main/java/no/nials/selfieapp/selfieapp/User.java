@@ -9,17 +9,20 @@ package no.nials.selfieapp.selfieapp;
 
 
 public class User {
-    private int id;
-    private String email, phone, gender;
+ //   private int id;
+    private String email, phone, gender, birthday, name;
 
-    public User(int id, String email, String phone, String gender) {
-        this.id = id;
+    public User( String name, String email, String phone, String birthday, String gender) {
+        //this.id = id;
+        this.name = name;
         this.phone = phone;
         this.email = email;
         this.gender = gender;
+        this.birthday = birthday;
     }
-    public int getId(){ return id;}
+    //public int getId(){ return id;}
 
+    public String getName() { return name;}
     public String getEmail() {
         return email;
     }
@@ -29,4 +32,6 @@ public class User {
     public String getGender() {
         return gender;
     }
+
+    public String getBirthday() { return birthday;}
 }

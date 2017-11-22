@@ -11,7 +11,9 @@ public class SharedPrefManager {
 
     //the constants
     private static final String SHARED_PREF_NAME = "selfieAppSharedPref";
+    private static final String KEY_NAME = "keyname";
     private static final String KEY_PHONE = "keyphone";
+    private static final String KEY_BIRTHDAY = "birthday";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_GENDER = "keygender";
     private static final String KEY_ID = "keyid";
@@ -51,8 +53,10 @@ public class SharedPrefManager {
     public User getUser() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
-                sharedPreferences.getInt(KEY_ID, -1),
+            //    sharedPreferences.getInt(KEY_ID, -1),
+                sharedPreferences.getString(KEY_NAME, null),
                 sharedPreferences.getString(KEY_PHONE, null),
+                sharedPreferences.getString(KEY_BIRTHDAY, null),
                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_GENDER, null)
         );

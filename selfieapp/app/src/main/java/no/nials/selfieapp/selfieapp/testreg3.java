@@ -1,10 +1,11 @@
 package no.nials.selfieapp.selfieapp;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -12,18 +13,30 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-
+public class testreg3 extends AppCompatActivity {
+String Url = "http://nials.no:8080/api/api/user/newUser";
     EditText editTextPhone, editTextEmail, editTextPassword, editTextBirthday, editTextName;
     RadioGroup radioGroupGender;
 
@@ -53,16 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 //if user pressed on button register
                 //here we will register the user to server
                 registerUser();
-            }
-        });
-
-        findViewById(R.id.textViewLogin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //if user pressed on login
-                //we will open the login screen
-                finish();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
 
@@ -115,34 +118,32 @@ public class MainActivity extends AppCompatActivity {
         class RegisterUser extends AsyncTask<Void, Void, String> {
 
             private ProgressBar progressBar;
-
-            @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
-                HashMap<String, String> params = new HashMap<>();
-                List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-
-                //creating request parameters
-                postParameters.add(new BasicNameValuePair("name", name));
-                postParameters.add(new BasicNameValuePair("birthday", birthday));
-                postParameters.add(new BasicNameValuePair("email", email));
-                postParameters.add(new BasicNameValuePair("password", password));
-                postParameters.add(new BasicNameValuePair("phone", phone1));
-                postParameters.add(new BasicNameValuePair("gender", gender));
+                final String name = editTextName.getText().toString().trim();
+                final String phone1 = editTextPhone.getText().toString().trim();
+                final int phone = Integer.parseInt(phone1);
+                final String email = editTextEmail.getText().toString().trim();
+                final String birthday = editTextBirthday.getText().toString().trim();
+                final String password = editTextPassword.getText().toString().trim();
 
 
 
-                String param1 = name;
-                String param2 = phone1;
-                String param3 = email;
-                String param4 = password;
-                String param5 = birthday;
-                String param6 = gender;
+                // Building Parameters
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("name", name));
+                params.add(new BasicNameValuePair("birthday", birthday));
+                params.add(new BasicNameValuePair("email", email));
+                params.add(new BasicNameValuePair("password", password));
+                params.add(new BasicNameValuePair("phone", phone1));
+                params.add(new BasicNameValuePair("gender", "male"));
 
-                //returing the response
-                return requestHandler.sendPostRequest("http://nials.no:8080/api/api/user/newUser",params);
+                // getting JSON String
+                // Note that create product url accepts POST method
+                String json = makeHttpRequest(Url, params);
+
+                return json;
             }
+
 
             @Override
             protected void onPreExecute() {
@@ -159,42 +160,24 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 //String url = "http://nials.no:8080/api/api/user/newUser";
                 try {
-                    //converting response to json object
-                    //
-                    // JSONObject obj = new JSONObject(s);
+                    JSONObject jsonData = new JSONObject(s);
+                    Boolean success = jsonData.getBoolean("success");
+                    String message = jsonData.getString("message");
 
-                    JSONObject obj = new JSONObject(s);
-
-
-                    //if no error in response
-                    if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-                        //getting the user from the response
-                        JSONObject userJson = obj.getJSONObject("user");
-
-                        //creating a new user object
-                        User user = new User(
-                               // userJson.getInt("id"),
-                                userJson.getString("name"),
-                                userJson.getString("email"),
-                                userJson.getString("birthday"),
-                                userJson.getString("phone"),
-                                userJson.getString("gender")
-                        );
-
-                        //storing the user in shared preferences
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
-                        //starting the profile activity
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    if (success) {
+                        //success
                     } else {
-                        Toast.makeText(getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();
+                        // failed to Register Fine
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                    //
+                    // JSONObject obj = new JSONObject(s);
+
+
+
+
             }
         }
 
@@ -203,4 +186,78 @@ public class MainActivity extends AppCompatActivity {
         ru.execute();
     }
 
+
+
+    public String makeHttpRequest(String url, List<NameValuePair> params)
+
+    {
+        InputStream is = null;
+        String json = "";
+
+        // Making HTTP request
+        try {
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setEntity(new UrlEncodedFormEntity(params));
+
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpEntity httpEntity = httpResponse.getEntity();
+            is = httpEntity.getContent();
+
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    is, "iso-8859-1"), 8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            is.close();
+
+            json = sb.toString();
+        } catch (Exception e) {
+            Log.e("Buffer Error", "Error converting result " + e.toString());
+        }
+
+
+        // return JSON String
+        return json;
+
+    }
 }
+
+    // constructor
+
+
+
+
+
+
+    /*
+
+    EditText editTextPhone, editTextEmail, editTextPassword, editTextBirthday, editTextName;
+    RadioGroup radioGroupGender;
+
+
+
+
+
+
+
+    protected void onPostExecute(String json) {
+        // dismiss the dialog once done
+        pDialog.dismiss();
+        Log.d("mylog", "json = " + json);
+        //parse here
+    }
+
+}*/
