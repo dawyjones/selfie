@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,7 +21,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editTextPhone, editTextEmail, editTextPassword;
+    EditText editTextPhone, editTextEmail, editTextPassword, editTextName;
     RadioGroup radioGroupGender;
 
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ProfileActivity.class));
             return;
         }
+        editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPhone = (EditText) findViewById(R.id.editTextPhone);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -66,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
         final String phone = editTextPhone.getText().toString().trim();
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
+        final String name = editTextName.getText().toString().trim();
         final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
+        final String birthday = "1990";
 
         //first we will do the validations
 
@@ -112,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
                 params.put("email", email);
                 params.put("password", password);
                 params.put("gender", gender);
+                params.put("birthday", birthday);
+                params.put("name", name);
 
                 //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_REGISTER, params);
@@ -133,14 +139,15 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     //converting response to json object
-                    JSONObject obj = new JSONObject(s);
+                    JSONArray obj = new JSONArray(s);
+                    JSONObject obj1 = obj.getJSONObject(0);
 
                     //if no error in response
-                    if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                    if (!obj1.getBoolean("error")) {
+                        Toast.makeText(getApplicationContext(), obj1.getString("message"), Toast.LENGTH_SHORT).show();
 
                         //getting the user from the response
-                        JSONObject userJson = obj.getJSONObject("user");
+                        JSONObject userJson = obj1.getJSONObject("user");
 
                         //creating a new user object
                         User user = new User(

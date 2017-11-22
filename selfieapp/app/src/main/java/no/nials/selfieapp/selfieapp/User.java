@@ -1,11 +1,5 @@
 package no.nials.selfieapp.selfieapp;
 
-/**
- *
- * user	userId	email	password	phone(unique)(primaryKey)	name	birthday	score
- *
- * Created by Kami on 30.10.2017.
- */
 
 
 public class User {
@@ -30,3 +24,4 @@ public class User {
         return gender;
     }
 }
+
