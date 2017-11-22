@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject userJson = obj1.getJSONObject("user");
 
                         //creating a new user object
-                        User user = new User(
+                    /*    User user = new User(
                                 userJson.getInt("id"),
                                 userJson.getString("email"),
                                 userJson.getString("phone"),
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         //storing the user in shared preferences
                         SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
-                        //starting the profile activity
+                        *///starting the profile activity
                         finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {

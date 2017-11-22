@@ -98,15 +98,15 @@ public class LoginActivity2 extends AppCompatActivity {
                         JSONObject userJson = obj.getJSONObject("User");
 
                         //creating a new user object
-                        User user = new User(
+                   /*     User user = new User(
                                 userJson.getInt("id"),
                                 userJson.getString("email"),
                                 userJson.getString("phone"),
                                 userJson.getString("gender")
                         );
-
+*/
                         //storing the user in shared preferences
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                        //SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
                         //starting the profile activity
                         finish();

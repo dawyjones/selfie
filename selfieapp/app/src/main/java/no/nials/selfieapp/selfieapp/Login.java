@@ -6,12 +6,12 @@ package no.nials.selfieapp.selfieapp;
         import android.os.AsyncTask;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
-        import android.support.v7.widget.LinearLayoutManager;
-        import android.support.v7.widget.RecyclerView;
-        import android.support.v7.widget.Toolbar;
+
         import android.util.JsonReader;
         import android.util.Log;
         import android.view.View;
+        import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.Toast;
         import org.json.JSONArray;
         import org.json.JSONException;
@@ -29,33 +29,43 @@ package no.nials.selfieapp.selfieapp;
         import java.util.List;
         import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     // CONNECTION_TIMEOUT and READ_TIMEOUT are in milliseconds
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
-    private RecyclerView mRVFishPrice;
-    private AdapterFish mAdapter;
+
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-    List<Photo> PhotoList = new ArrayList<>();
+    List<User> Userlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //Make call to AsyncTask'
-        new AsyncFetch().execute();
+        setContentView(R.layout.activity_login);
+
+        final EditText editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        final EditText editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        final Button bLogin = (Button) findViewById(R.id.buttonLogin);
+
+        bLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email = editTextEmail.getText().toString();
+                final String password = editTextPassword.getText().toString();
+                new AsyncFetch().execute();
+            }});
+
+                //Make call to AsyncTask'
+
+
+
     }
 
-    public void ndActivity (View view) {
-        Intent newActivity = new Intent(this, DisplayMessageActivity.class);
 
-        startActivity(newActivity);
-    }
 
     protected class AsyncFetch extends AsyncTask<String, String, String> {
-        ProgressDialog pdLoading = new ProgressDialog(MainActivity.this);
+        ProgressDialog pdLoading = new ProgressDialog(Login.this);
         HttpURLConnection conn;
         URL url = null;
 
@@ -77,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
-                url = new URL("http://192.168.38.102:8080/pstore/api/messages/test");
+                url = new URL("http://nials.no:8080/selfie/api/user");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -115,26 +125,30 @@ public class MainActivity extends AppCompatActivity {
 
                 while (jr.hasNext()) {
                     System.out.println("JR has next element");
-                    String id = null;
-                    // long size = -1;
-                    String version = null;
+                    String email = null;
+                   int id = 0;
+                   String gender = null;
+                   String birthday = null;
+                   String name = null;
+                    String password = null;
+                    int phone = 123;
 
                     jr.beginObject();
                     while (jr.hasNext()) {
                         switch (jr.nextName()) {
-                            case "id":
+                            case "email":
                                 //System.out.println("HEI ID: " + jr.nextString());
-                                id = jr.nextString();
-                                result.append(id);
+                                email = jr.nextString();
+                                result.append(email);
                                 break;
                             /** case "size":
                              //size = jr.nextLong();
                              //break;
                              **/
-                            case "date":
+                            case "password":
                                 // try {
                                 //version = format.parse(jr.nextString());
-                                version = jr.nextString();
+                                password = jr.nextString();
                                 // } catch (ParseException e) {
                                 //   Log.e("LoadThumb", "Failed to parse date", e);
                                 // }
@@ -144,14 +158,14 @@ public class MainActivity extends AppCompatActivity {
 
 
                                 // Pass data to onPostExecute method
-                                System.out.println("Result to strin: " + result.toString());
+                                System.out.println("Result to string: " + result.toString());
 
 
                         }
                     }
                     jr.endObject();
-                    PhotoList.add(new Photo(id,version));
-                    System.out.println("New photo added: " + id + " date: " + version);
+                    Userlist.add(new User(id, email, password, phone, name, birthday, gender));
+                    System.out.println("Your email:  " + email + " Password:  " + password);
 
                 }
                 System.out.println("RESULT STRING: " +result.toString());
@@ -172,16 +186,16 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("HEI to string :" + result.toString());
             //System.out.println("HEI :" + result);
             pdLoading.dismiss();
-            List<Photo> data = new ArrayList<>();
+            List<User> data = new ArrayList<>();
 
             pdLoading.dismiss();
             /**for (Photo p : PhotoList) {
 
              }**/
-            mRVFishPrice = (RecyclerView) findViewById(R.id.fishPriceList);
-            mAdapter = new AdapterFish(MainActivity.this, PhotoList);
-            mRVFishPrice.setAdapter(mAdapter);
-            mRVFishPrice.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+           // mRVFishPrice = (RecyclerView) findViewById(R.id.fishPriceList);
+           // mAdapter = new AdapterFish(MainActivity.this, Userlist);
+          //  mRVFishPrice.setAdapter(mAdapter);
+           // mRVFishPrice.setLayoutManager(new LinearLayoutManager(Login.this));
             /**
              try {
 
