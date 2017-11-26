@@ -37,7 +37,7 @@ public class SharedPrefManager {
     public void userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_PHONE, user.getPhone());
+        editor.putInt(KEY_PHONE, user.getPhone());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_GENDER, user.getGender());
         editor.apply();
@@ -46,17 +46,22 @@ public class SharedPrefManager {
     //Checks if someone is already logged in
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_PHONE, null) != null;
-    }
+        return sharedPreferences.getString(KEY_EMAIL, null) != null;
+    }}
 
     //login
-    public User getUser() {
+ /*   public User getUser() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
+<<<<<<< HEAD
             //    sharedPreferences.getInt(KEY_ID, -1),
                 sharedPreferences.getString(KEY_NAME, null),
                 sharedPreferences.getString(KEY_PHONE, null),
                 sharedPreferences.getString(KEY_BIRTHDAY, null),
+=======
+                sharedPreferences.getInt(KEY_ID, -1),
+             //   sharedPreferences.getInt(KEY_PHONE, null),
+>>>>>>> origin/Kristoffer
                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_GENDER, null)
         );
@@ -71,3 +76,4 @@ public class SharedPrefManager {
         mCtx.startActivity(new Intent(mCtx, LoginActivity.class));
     }
 }
+ */

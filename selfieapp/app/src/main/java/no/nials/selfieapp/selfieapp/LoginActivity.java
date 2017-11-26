@@ -1,44 +1,49 @@
 package no.nials.selfieapp.selfieapp;
 
-        import android.content.Intent;
-        import android.os.AsyncTask;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.text.TextUtils;
-        import android.view.View;
-        import android.widget.EditText;
-        import android.widget.ProgressBar;
-        import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+import no.nials.selfieapp.selfieapp.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
-
-    EditText editTextEmail, editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        final EditText editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        final EditText editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        final Button bLogin = (Button) findViewById(R.id.buttonLogin);
 
-
-        //if user presses on login
-        //calling the method login
-        findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userLogin();
-            }
-        });
-
-        //if user presses on not registered
         findViewById(R.id.textViewRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,39 +52,27 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-    }
 
-    private void userLogin() {
-        //first getting the values
-        final String email = editTextEmail.getText().toString();
-        final String password = editTextPassword.getText().toString();
 
-        //validating inputs
-        if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Please enter your email");
-            editTextEmail.requestFocus();
-            return;
-        }
 
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Please enter your password");
-            editTextPassword.requestFocus();
-            return;
-        }
 
-        //if everything is fine
-
-        class UserLogin extends AsyncTask<Void, Void, String> {
-
-            ProgressBar progressBar;
-
+        bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.VISIBLE);
-            }
+            public void onClick(View v) {
+                final String email = editTextEmail.getText().toString();
+                final String password = editTextPassword.getText().toString();
 
+                // Response received from the server
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonResponse = new JSONArray(response);
+
+
+
+
+<<<<<<< HEAD
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -120,23 +113,40 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+=======
+                           // JSONObject jsonEmail = jsonResponse.getJSONObject(1);
+                            //JSONObject jsonName = jsonResponse.getJSONObject(5);
+                            JSONObject jsonObject = new JSONObject(response);
+>>>>>>> origin/Kristoffer
 
-            @Override
-            protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
+                            boolean success = true;//jsonObject.getBoolean("success");
+                            if (success) {
+                                String name = jsonObject.getString("name");
+                               String email = jsonObject.getString("email");
 
-                //creating request parameters
-                HashMap<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("password", password);
 
-                //returing the response
-                return requestHandler.sendPostRequest(URLs.URL_LOGIN, params);
+                                Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                                intent.putExtra("name", name);
+                                intent.putExtra("email", email);
+                                LoginActivity.this.startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setMessage("Login Failed")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                queue.add(loginRequest);
             }
-        }
-
-        UserLogin ul = new UserLogin();
-        ul.execute();
+        });
     }
 }

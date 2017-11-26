@@ -13,26 +13,16 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-<<<<<<< HEAD
-            android:hint="Name"
-            android:inputType="text" />
-
-        <EditText
-=======
             android:hint="name"
             android:inputType="text" />
 
-
         <EditText
-
->>>>>>> origin/Kristoffer
             android:id="@+id/editTextPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,14 +31,7 @@
             android:hint="@string/phone"
             android:inputType="phone" />
 
-        <EditText
-            android:id="@+id/editTextBirthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:hint="Birhday"
-            android:inputType="text" />
+
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -100,6 +83,14 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:text="Register" />
+
+        <Button
+            android:id="@+id/login_clear_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Clear fields" />
 
         <TextView
             android:id="@+id/textViewLogin"

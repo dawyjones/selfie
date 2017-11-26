@@ -7,6 +7,7 @@ android {
         applicationId "no.nials.selfieapp.selfieapp"
         minSdkVersion 21
         targetSdkVersion 26
+        useLibrary 'org.apache.http.legacy'
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
