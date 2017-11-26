@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -37,7 +38,9 @@ public class PictureResource {
     
     @POST
     @Path("newpicture")
-    public Response newPicture(@QueryParam(value  = "picture") String pictureJson,
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
+    public Response newPicture(@QueryParam(value  = "pictureJson") String pictureJson,
                                @QueryParam(value  = "author") int author)
     {
         Picture picture = new Picture();
@@ -47,9 +50,6 @@ public class PictureResource {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
         int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        System.out.println(year);
-        System.out.println(month);
-        System.out.println(day);
         String date = String.valueOf(year) + "-" + String.valueOf(month) + "-"
                       + String.valueOf(day);
         picture.setDate(date);
@@ -57,6 +57,8 @@ public class PictureResource {
         picture.setVote(0);
         
         em.persist(picture);
-        return Response.ok(pictureJson).build();
+        System.out.println(pictureJson);
+        return Response.ok(picture).build();
+        
     }
 }

@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.ws.rs.Produces;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @Entity
-@XmlRootElement
+@Produces("application/json")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Table(name="picture")
 public class Picture {

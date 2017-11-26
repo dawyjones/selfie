@@ -14,7 +14,7 @@ create table if not exists user  (
 
 create table if not exists picture (
     pictureID int primary key unique not null auto_increment,
-    picture varchar(20000),
+    pictureJson varchar(20000),
     author int(255),
     foreign key (author) references user(userId),
     date date,
@@ -36,4 +36,11 @@ create table if not exists points (
 );
 
 
+create table if not exists SEQUENCE (
+	SEQ_NAME varchar(255),
+    SEQ_COUNT int(10)
+);
+
+INSERT INTO SEQUENCE (SEQ_NAME, SEQ_COUNT)
+VALUES ("SEQ_GEN", 0);
 

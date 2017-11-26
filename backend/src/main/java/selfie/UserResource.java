@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -36,6 +37,8 @@ public class UserResource {
     
     @POST
     @Path("newUser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
     public Response newUser(@QueryParam(value = "name") String name,
                             @QueryParam(value = "birthday") String birthday,
                             @QueryParam(value = "email") String email,
