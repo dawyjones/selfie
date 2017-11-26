@@ -67,38 +67,6 @@ class AsyncT extends AsyncTask<Void, Void, String> {
         }
         return null;
 
-/*
-        try {
-            URL url = new URL("http://192.168.1.13:8080/messenger/webapi/messages"); //Enter URL here
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-            httpURLConnection.setDoOutput(true);
-            httpURLConnection.setRequestMethod("POST"); // here you are telling that it is a POST request, which can be changed into "PUT", "GET", "DELETE" etc.
-            httpURLConnection.setRequestProperty("Content-Type", "application/json"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`
-            httpURLConnection.connect();
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("author", "0");
-            jsonObject.put("message", picture);;
-
-            DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
-            wr.writeBytes(jsonObject.toString());
-            wr.flush();
-            wr.close();
-
-            String jsonString = jsonObject.toString();
-            Log.d("SONDRE",jsonString);
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return null
-        */
     }
 
 }

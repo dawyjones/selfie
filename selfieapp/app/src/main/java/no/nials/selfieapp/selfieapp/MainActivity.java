@@ -13,8 +13,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -121,15 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
                 HashMap<String, String> params = new HashMap<>();
-                List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-
-                //creating request parameters
-                postParameters.add(new BasicNameValuePair("name", name));
-                postParameters.add(new BasicNameValuePair("birthday", birthday));
-                postParameters.add(new BasicNameValuePair("email", email));
-                postParameters.add(new BasicNameValuePair("password", password));
-                postParameters.add(new BasicNameValuePair("phone", phone1));
-                postParameters.add(new BasicNameValuePair("gender", gender));
 
 
 
