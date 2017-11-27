@@ -38,10 +38,10 @@ public class PictureResource {
     
     @POST
     @Path("newpicture")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces("application/json")
-    public Response newPicture(@QueryParam(value  = "pictureJson") String pictureJson,
-                               @QueryParam(value  = "author") int author)
+   //@Consumes(MediaType.APPLICATION_JSON)
+   // @Produces(MediaType.APPLICATION_JSON)
+    public Response newPicture(String pictureJson,
+                               @QueryParam(value = "author") int author)
     {
         Picture picture = new Picture();
         picture.setAuthor(author);
@@ -57,7 +57,7 @@ public class PictureResource {
         picture.setVote(0);
         
         em.persist(picture);
-        System.out.println(pictureJson);
+        System.out.println("gjreiohewpfgjerwoip");
         return Response.ok(picture).build();
         
     }

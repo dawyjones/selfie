@@ -54,6 +54,6 @@ public class UserResource {
         user.setPhone(phone);
         user.setGender(gender);
         em.persist(user);
-        return Response.ok(name).build();
+        return Response.ok(user).build();
     }
 }
