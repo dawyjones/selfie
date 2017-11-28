@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 final String gender = "M";
                 AsyncT2 asyncT = new AsyncT2(email, password,  phone,  name, birthday,  gender);
                 asyncT.execute();
-                startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
 

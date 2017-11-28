@@ -60,7 +60,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void leaderBoardsActivity(View view){
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
     public void myPicturesActivity(View view){
@@ -72,7 +72,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void logOutActivity(View view){
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }

@@ -95,7 +95,7 @@ public class MySelfiesActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://158.38.22.164:8080/messenger/webapi/messages");
+                URL url = new URL("http://nials.no:8080/selfie/api/picture");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -110,7 +110,7 @@ public class MySelfiesActivity extends AppCompatActivity {
                 for(int i = 0; i <JA.length(); i++){
                     JSONObject JO = (JSONObject) JA.get(i);
                     singleParsed =
-                            JO.get("message") + "\n";
+                            JO.get("pictureJson") + "\n";
 
                     dataParsed = dataParsed + singleParsed +"\n" ;
 
