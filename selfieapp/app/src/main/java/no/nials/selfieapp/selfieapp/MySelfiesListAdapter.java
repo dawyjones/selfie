@@ -2,6 +2,9 @@ package no.nials.selfieapp.selfieapp;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +17,13 @@ import java.util.Iterator;
 
 public class MySelfiesListAdapter extends ArrayAdapter<String> {
 
-    ArrayList imgList = new ArrayList<>();
+    ArrayList<String> imgList = new ArrayList();
     Iterator itr = imgList.iterator();
 
     public MySelfiesListAdapter(Context context, int textViewRecourceId, ArrayList objects) {
         super(context, textViewRecourceId, objects);
         //System.out.println("TestingAdapterInput: " + urls.toString());
-        this.imgList=objects;
+        this.imgList = objects;
     }
     @Override
     public int getCount() {
@@ -40,10 +43,23 @@ public class MySelfiesListAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.grid_view_items, null);
         ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
+        System.out.println("TEST imgList size: " + imgList.size());
 
-        Picasso.with(getContext())
-                .load(imgList.get(position).toString())
-                .into(imageView);
+      /**  byte[] imageBytes = Base64.decode(dataParsed, Base64.DEFAULT);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+**/ /*    for (int i = 0; i < imgList.size(); i++) {
+
+            System.out.println("TEST ting : " + imgList.get(i));*/
+            byte[] imageBytes = Base64.decode(imgList.get(position).toString(), Base64.DEFAULT);
+            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        /*    //Byte bitkuk = imgList.get(i);
+        //    butkuk
+
+
+        }*/
+
+         imageView.setImageBitmap(decodedImage);
+
         return v;
 
     }
