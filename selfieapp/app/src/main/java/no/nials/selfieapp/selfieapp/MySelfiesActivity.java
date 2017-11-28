@@ -62,28 +62,14 @@ public class MySelfiesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         new AsyncFetch().execute();
-
-        setContentView(R.layout.mygridview);
-        simplelist = (GridView) findViewById(R.id.simpleGridView);
+        super.onCreate(savedInstanceState);
 
 
 
 
 
-        MySelfiesListAdapter adp = new MySelfiesListAdapter(this,R.layout.grid_view_items, selfieList);
-        simplelist.setAdapter(adp);
-        simplelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), MySelfiesFullView.class);
-                intent.putExtra("url",selfieList.get(position).toString());
-               // System.out.println("Clicked this imgURL: " +selfieList.get(position).toString());
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -136,6 +122,26 @@ public class MySelfiesActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
+            setContentView(R.layout.mygridview);
+            simplelist = (GridView) findViewById(R.id.simpleGridView);
+            MySelfiesListAdapter adp = new MySelfiesListAdapter(getApplicationContext(),R.layout.grid_view_items, selfieList);
+            simplelist.setAdapter(adp);
+
+            simplelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v,
+                                        int position, long id) {
+                    Intent intent = new Intent(getApplicationContext(), MySelfiesFullView.class);
+                    intent.putExtra("url",selfieList.get(position).toString());
+                    // System.out.println("Clicked this imgURL: " +selfieList.get(position).toString());
+                    startActivity(intent);
+                }
+            });
+
+
+
+
 
             //StreamActivity.data.setText(dataParsed);
 

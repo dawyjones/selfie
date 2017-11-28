@@ -12,23 +12,15 @@
         android:layout_marginTop="30dp"
         android:text="Take a new selfie" />
 
-    <Button
-        android:id="@+id/buttonLeaderboards"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_alignStart="@+id/buttonPicture"
-        android:layout_below="@+id/buttonPicture"
-        android:layout_marginTop="22dp"
-        android:text="Leaderboards" />
 
     <Button
         android:id="@+id/buttonMyPictures"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_alignStart="@+id/buttonLeaderboards"
-        android:layout_below="@+id/buttonLeaderboards"
+        android:layout_alignStart="@+id/buttonPicture"
+        android:layout_below="@+id/buttonPicture"
         android:layout_marginTop="22dp"
-        android:text="My selfies" />
+        android:text="All selfies" />
 
     <Button
         android:id="@+id/buttonProfile"
@@ -37,7 +29,7 @@
         android:layout_alignStart="@+id/buttonMyPictures"
         android:layout_below="@+id/buttonMyPictures"
         android:layout_marginTop="22dp"
-        android:text="The Selfie Stream" />
+        android:text="The last selfie" />
 
     <Button
         android:id="@+id/buttonLogout"

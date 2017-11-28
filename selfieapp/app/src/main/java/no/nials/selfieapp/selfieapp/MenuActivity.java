@@ -19,7 +19,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         btnTakePicture = (Button) findViewById(R.id.buttonPicture);
-        btnLeaderboards = (Button) findViewById(R.id.buttonLeaderboards);
         btnMyPictures = (Button) findViewById(R.id.buttonMyPictures);
         btnProfile = (Button) findViewById(R.id.buttonProfile);
         btnLogout = (Button) findViewById(R.id.buttonLogout);
@@ -29,12 +28,7 @@ public class MenuActivity extends AppCompatActivity {
                 pictureActivity(view);
             }
         });
-        btnLeaderboards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                leaderBoardsActivity(view);
-            }
-        });
+
         btnMyPictures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

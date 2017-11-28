@@ -41,6 +41,7 @@ public class CameraSelfie extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 upload();
+                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
             }
         });
 
