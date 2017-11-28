@@ -40,8 +40,7 @@ public class PictureResource {
     @Path("newpicture")
    //@Consumes(MediaType.APPLICATION_JSON)
    // @Produces(MediaType.APPLICATION_JSON)
-    public Response newPicture(String pictureJson,
-                               @QueryParam(value = "author") int author)
+    public Response newPicture(String pictureJson, int author)
     {
         Picture picture = new Picture();
         picture.setAuthor(author);
