@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute (Void aVoid)
         {
             super.onPostExecute(aVoid);
-            System.out.println(dataParsed+"1");
+
 
 
         }
