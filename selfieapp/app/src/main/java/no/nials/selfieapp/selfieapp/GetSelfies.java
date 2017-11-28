@@ -25,7 +25,8 @@ public class GetSelfies extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL url = new URL("http://192.168.1.13:8080/messenger/webapi/messages");
+            URL url = new URL("http://nials.no:8080/selfie/api/picture/");
+            //URL url = new URL("http://158.38.22.164:8080/messenger/webapi/messages");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -39,7 +40,7 @@ public class GetSelfies extends AsyncTask<Void,Void,Void> {
             for(int i = JA.length() - 1 ;i <JA.length(); i++){
                 JSONObject JO = (JSONObject) JA.get(i);
                 singleParsed =
-                        JO.get("message") + "\n";
+                        JO.get("pictureJson") + "\n";
 
                 dataParsed = dataParsed + singleParsed +"\n" ;
 

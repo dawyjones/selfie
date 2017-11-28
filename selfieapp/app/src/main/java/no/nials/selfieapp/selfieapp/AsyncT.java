@@ -30,10 +30,15 @@ class AsyncT extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         try {
+<<<<<<< HEAD
             String address = "http://nials.no:8080/selfie/api/picture";
+=======
+            //String address = "http://158.38.22.164:8080/messenger/webapi/messages";
+            String address = "http://nials.no:8080/selfie/api/picture/newpicture";
+>>>>>>> Sondre
             JSONObject json = new JSONObject();
-            json.put("author", "abc");
-            json.put("message", picture);
+            json.put("pictureJson", picture);
+            json.put("author", "1");
             String requestBody = json.toString();
             URL url = new URL(address);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
