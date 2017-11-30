@@ -12,7 +12,7 @@
         android:layout_height="150dp"
         android:padding="2dp"
         android:scaleType="fitCenter"
-    android:rotation="-90"
+    android:rotation="0"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 

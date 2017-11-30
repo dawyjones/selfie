@@ -18,20 +18,29 @@ import java.net.URL;
 
 class AsyncT extends AsyncTask<Void, Void, String> {
 
-    String picture;
+    String picture = null;
+    private OnPostExecute callback = null;
 
     public AsyncT(String path){
 
         this.picture = path;
     }
 
+    public AsyncT(String picture, OnPostExecute callback) {
+        this.picture = picture;
+        this.callback = callback;
+    }
+
+    public interface OnPostExecute {
+        void onPostExecute();
+    }
 
 
     @Override
     protected String doInBackground(Void... params) {
         try {
 
-           // String address = "http://158.38.101.106:8080/selfie/api/picture";
+            // String address = "http://158.38.101.106:8080/selfie/api/picture";
 
             //String address = "http://158.38.22.164:8080/messenger/webapi/messages";
             String address = "http://158.38.101.106:8080/selfie/api/picture/newpicture";
@@ -40,6 +49,7 @@ class AsyncT extends AsyncTask<Void, Void, String> {
             json.put("pictureJson", picture);
             json.put("author", "1");
             String requestBody = json.toString();
+            System.out.println("Debug: " + requestBody);
             URL url = new URL(address);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
@@ -69,39 +79,13 @@ class AsyncT extends AsyncTask<Void, Void, String> {
             return e.toString();
         }
         return null;
-
-/*
-        try {
-            URL url = new URL("http://192.168.1.13:8080/messenger/webapi/messages"); //Enter URL here
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-            httpURLConnection.setDoOutput(true);
-            httpURLConnection.setRequestMethod("POST"); // here you are telling that it is a POST request, which can be changed into "PUT", "GET", "DELETE" etc.
-            httpURLConnection.setRequestProperty("Content-Type", "application/json"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`
-            httpURLConnection.connect();
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("author", "0");
-            jsonObject.put("message", picture);;
-
-            DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
-            wr.writeBytes(jsonObject.toString());
-            wr.flush();
-            wr.close();
-
-            String jsonString = jsonObject.toString();
-            Log.d("SONDRE",jsonString);
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return null
-        */
     }
 
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        if (callback != null) {
+            callback.onPostExecute();
+        }
+    }
 }

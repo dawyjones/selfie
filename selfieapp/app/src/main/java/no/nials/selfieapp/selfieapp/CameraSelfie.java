@@ -40,8 +40,13 @@ public class CameraSelfie extends AppCompatActivity {
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upload();
-                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                AsyncT asyncT = new AsyncT(picturePath, new AsyncT.OnPostExecute() {
+                    @Override
+                    public void onPostExecute() {
+                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                    }
+                });
+                asyncT.execute();
             }
         });
 
@@ -66,12 +71,12 @@ public class CameraSelfie extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        String imageString = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
 
        /* Log.d("SONDRE",imageString);*/
 
-        imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-        picturePath = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        imageBytes = Base64.decode(imageString, Base64.NO_WRAP);
+        picturePath = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
         imageView.setImageBitmap(decodedImage);
         picturePath.trim();
