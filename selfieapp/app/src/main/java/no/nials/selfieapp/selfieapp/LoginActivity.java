@@ -1,30 +1,58 @@
 package no.nials.selfieapp.selfieapp;
 
-        import android.content.Intent;
-        import android.os.AsyncTask;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.text.TextUtils;
-        import android.view.View;
-        import android.widget.EditText;
-        import android.widget.ProgressBar;
-        import android.widget.Toast;
+/**
+ * Created by Kami on 18.11.2017.
+ */
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.sql.SQLOutput;
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
+    String data = "";
+    String dataParsed = "";
+    String singleParsed = "";
     EditText editTextEmail, editTextPassword;
+    String email;
+    String pw;
+    String dataParsed2 = "";
+    String singleParsed2 = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        Login2 login = new Login2();
+        login.execute();
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
@@ -34,7 +62,14 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userLogin();
+                email = editTextEmail.getText().toString().trim();
+                pw = editTextPassword.getText().toString().trim();
+                if((email.equals(dataParsed))&&pw.equals(dataParsed2)){
+                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));}
+                else{
+                    Toast.makeText(getApplicationContext(), "Wrong email or password.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -49,92 +84,94 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void userLogin() {
-        //first getting the values
-        final String email = editTextEmail.getText().toString();
-        final String password = editTextPassword.getText().toString();
 
-        //validating inputs
-        if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Please enter your email");
-            editTextEmail.requestFocus();
-            return;
-        }
+    protected class Login2 extends AsyncTask<Void, Void, Void> {
+        String email, pw;
+        // public Login2(String email, String pw){
+        //    this.email = email;
+        //   this.pw = pw;
+        //}
 
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Please enter your password");
-            editTextPassword.requestFocus();
-            return;
-        }
+        @Override
+        protected Void doInBackground(Void... voids) {
 
-        //if everything is fine
+            String str = "http://nials.no:8080/selfie/api/user";
+            URLConnection urlConn = null;
+            BufferedReader bufferedReader = null;
+            try {
+                URL url = new URL(str);
+                urlConn = url.openConnection();
+                InputStream inputStream = urlConn.getInputStream();
 
-        class UserLogin extends AsyncTask<Void, Void, String> {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                while (line != null) {
+                    line = bufferedReader.readLine();
+                    data = data + line;
+                }
 
-            ProgressBar progressBar;
+                JSONArray JA = new JSONArray(data);
+                for (int i = JA.length() - 1; i < JA.length(); i++) {
+                    JSONObject JO = (JSONObject) JA.get(i);
+                    singleParsed =
+                            JO.get("email") + "";
 
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.VISIBLE);
+                    dataParsed = dataParsed + singleParsed;
+
+                    singleParsed2 =
+                            JO.get("password") + "";
+
+                    dataParsed2 = dataParsed2 + singleParsed2;
+
+
+
+                }
+
+
+                // bufferedReader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+
+           /* StringBuffer stringBuffer = new StringBuffer();
+            String line;
+            while ((line = bufferedReader.readLine()) != null)
+            {
+                stringBuffer.append(line);
             }
 
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                progressBar.setVisibility(View.GONE);
-
-
+            return new JSONObject(stringBuffer.toString());
+        }
+        catch(Exception ex)
+        {
+            Log.e("App", "Login2", ex);
+            return null;
+        }
+        finally
+        {
+            if(bufferedReader != null)
+            {
                 try {
-                    //converting response to json object
-                    JSONObject obj = new JSONObject(s);
-
-                    //if no error in response
-                    if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-                        //getting the user from the response
-                        JSONObject userJson = obj.getJSONObject("user");
-
-                        //creating a new user object
-                        User user = new User(
-                                userJson.getInt("id"),
-                                userJson.getString("email"),
-                                userJson.getString("phone"),
-                                userJson.getString("gender")
-                        );
-
-                        //storing the user in shared preferences
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
-                        //starting the profile activity
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
+                    bufferedReader.close();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
-
-                //creating request parameters
-                HashMap<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("password", password);
-
-                //returing the response
-                return requestHandler.sendPostRequest(URLs.URL_LOGIN, params);
+        }
+    }*/
+            } catch (Exception e) {
             }
+            return null;
+        }
+        @Override
+        protected void onPostExecute (Void aVoid)
+        {
+            super.onPostExecute(aVoid);
+
+
+
         }
 
-        UserLogin ul = new UserLogin();
-        ul.execute();
     }
 }
+
+
+
+
